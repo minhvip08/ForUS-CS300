@@ -2,8 +2,7 @@
   "name": "forus-backend",
   "scripts": {
     "start": "node server.js",
-    "start_nodemon": "nodemon server.js",
-    "build": "npm i"
+    "start_nodemon": "nodemon server.js"
   },
   "description": "A 5-member project for CS300 Software Engineering.",
   "version": "1.0.0",
