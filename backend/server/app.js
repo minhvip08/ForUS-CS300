@@ -39,7 +39,9 @@ app.use(xss());
 
 var allowedOrigins = [
   'http://localhost:3000',
-  'http://localhost:8000'
+  'http://localhost:8000',
+  'https://forus-cs300.onrender.com',
+  'https://for-us-cs-300-vvtm.vercel.app'
 ];
 
 app.use(cors({
