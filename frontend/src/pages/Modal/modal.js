@@ -4,91 +4,81 @@ import { ThreadInformation } from "../Box/UserControl/usercontrol";
 import { getTimePassed } from "../../utils/getTimePassed";
 
 export function DeleteModal({
-  isOpen,
-  handleClose,
-  handleDelete,
-  modalTitle,
-  modalContent,
+    isOpen,
+    handleClose,
+    handleDelete,
+    modalTitle,
+    modalContent,
 }) {
-  const handleEscape = (e) => {
-    if (e.keyCode === 27) {
-      handleClose();
-    }
-  };
+    const handleEscape = (e) => {
+        if (e.keyCode === 27) {
+            handleClose();
+        }
+    };
 
-  useEffect(() => {
-    document.addEventListener("keydown", handleEscape);
+    useEffect(() => {
+        document.addEventListener("keydown", handleEscape);
 
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, []);
+        return () => document.removeEventListener("keydown", handleEscape);
+    }, []);
 
-  return (
-    <>
-      <div
-        className="react-modal-overlay"
-        style={{ display: isOpen ? "block" : "none" }}
-        onClick={handleClose}
-      >
-        <div
-          className={`modal fade react-modal-style ${isOpen ? "show" : ""}`}
-          tabIndex="-1"
-          role="dialog"
-          style={{ display: isOpen ? "block" : "none" }}
-        >
-          <div className="modal-dialog modal-dialog-centered">
-            <div
-              className="react-modal-wrapper"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div
-                class="modal-content"
-                style={{ background: "#1D76C6", border: "1px solid #46A5FA" }}
-              >
+    return (
+        <>
+            <div className="react-modal-overlay" style={{ display: isOpen ? 'block' : 'none' }} onClick={handleClose}>
                 <div
-                  class="modal-header"
-                  style={{ borderBottom: "1px solid #46A5FA" }}
+                    className={`modal fade react-modal-style ${isOpen ? "show" : ""}`}
+                    tabIndex="-1"
+                    role="dialog"
+                    style={{ display: isOpen ? "block" : "none" }}
                 >
-                  <h1
-                    className="modal-title fs-5 text-white"
-                    id="deleteModalLabel"
-                  >
-                    {modalTitle}
-                  </h1>
-                  <button
-                    type="button"
-                    className="btn text-white"
-                    onClick={handleClose}
-                  >
-                    x
-                  </button>
+                    <div className="modal-dialog modal-dialog-centered" onClick={e => e.stopPropagation()}>
+
+                        <div
+                            class="modal-content"
+                            style={{ background: "#1D76C6", border: "1px solid #46A5FA" }}
+                        >
+                            <div
+                                class="modal-header"
+                                style={{ borderBottom: "1px solid #46A5FA" }}
+                            >
+                                <h1 className="modal-title fs-5 text-white" id="deleteModalLabel">
+                                    {modalTitle}
+                                </h1>
+                                <button
+                                    type="button"
+                                    className="btn text-white"
+                                    onClick={handleClose}
+                                >
+                                    x
+                                </button>
+                            </div>
+                            <div className="modal-body text-white">{modalContent}</div>
+                            <div
+                                class="modal-footer"
+                                style={{ borderTop: "1px solid #46A5FA" }}
+                            >
+                                <button
+                                    type="button"
+                                    className="btn btn-primary"
+                                    onClick={handleClose}
+                                >
+                                    Không
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-danger"
+                                    onClick={handleDelete}
+                                >
+                                    Xóa
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div className="modal-body text-white">{modalContent}</div>
-                <div
-                  class="modal-footer"
-                  style={{ borderTop: "1px solid #46A5FA" }}
-                >
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={handleClose}
-                  >
-                    Đóng
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={handleDelete}
-                  >
-                    Xóa
-                  </button>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 }
 
 export function ReportModal({ isOpen, handleClose, handleDelete, modalTitle }) {
@@ -373,15 +363,15 @@ export function ReportCardModal({ isOpen, handleClose, handleDelete, report }) {
                 <table>
                   <tbody>
                     <tr>
-                      <th>Report ID:</th>
+                      <th>Báo cáo ID:</th>
                       <td>{report._id}</td>
                     </tr>
                     <tr>
-                      <th>Time created:</th>
+                      <th>Thời gian:</th>
                       <td>{getTimePassed(Date.parse(report.createdAt))}</td>
                     </tr>
                     <tr>
-                      <th>Report Content:</th>
+                      <th>Nội dung bị báo cáo:</th>
                       <td>
                         <a style={{ color: "white" }} href={info.link} target="_blank">
                           {info.link.replace(/^([^]{20})[^]+$/, "$1...")}
@@ -389,7 +379,7 @@ export function ReportCardModal({ isOpen, handleClose, handleDelete, report }) {
                       </td>
                     </tr>
                     <tr>
-                      <th>Reported by: </th>
+                      <th>Báo cáo bởi: </th>
                       <td>
                         <ThreadInformation
                           thread={{ author: report.reporter }}
@@ -399,7 +389,7 @@ export function ReportCardModal({ isOpen, handleClose, handleDelete, report }) {
                       </td>
                     </tr>
                     <tr>
-                      <th>Report content:</th>
+                      <th>Nội dung:</th>
                       <td>
                         <textarea
                           contentEditable={false}
@@ -428,7 +418,7 @@ export function ReportCardModal({ isOpen, handleClose, handleDelete, report }) {
                   className="btn btn-success"
                   onClick={handleDelete}
                 >
-                  Mark As Resolved
+                  Xoá
                 </button>
               </div>
             </div>

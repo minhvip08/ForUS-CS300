@@ -47,7 +47,7 @@ export default function ({ thread }) {
       <div className="row m-0 p-0 flex-grow-1">
         <div
           className="col-lg-2 bg-card-secondary round-left d-flex flex-column align-items-center text-center"
-          style={{ paddingTop: "20px", paddingLeft: "20px" }}
+          style={{ paddingTop: "20px", paddingInline: "20px" }}
         >
           <img
             className="rounded-circle centered-and-cropped bg-dark"
@@ -60,10 +60,10 @@ export default function ({ thread }) {
             }
             alt="avatar"
           />
-          <div className="username mt-2">
-            <a className="text-start user-link" href={`/user/${thread.author._id}`}>{thread.author && thread.author.fullname}</a>
+          <a className="text-start user-link username mt-2" href={`/user/${thread.author._id}`}>{thread.author && thread.author.fullname}</a>
+          <p>
             {thread.isUpdater != 1 ? <ReportUserButton user={thread.author}/> : null}
-          </div>
+          </p>
         </div>
         <div className="col-lg-10 bg-card-primary round-right d-flex flex-column justify-content-between">
           <div

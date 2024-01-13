@@ -42,7 +42,7 @@ export default function ResetPassword() {
   };
   return (
     <div className="order-md-1 text-start">
-      <h3 className="mb-3">Reset Password</h3>
+      <h3 className="text-center mb-3">Lấy Mật Khẩu</h3>
       <div
         className={`alert alert-danger my-2 d-flex align-items-center font-weight-bold ${
           !validPassword ? "d-block" : "d-none"
@@ -54,7 +54,7 @@ export default function ResetPassword() {
 
       <div className="   ">
         <div className="mb-3">
-          <label htmlFor="address">New Password</label>
+          <label htmlFor="address">Mật khẩu mới</label>
           <input
             type="password"
             className="form-control"
@@ -69,7 +69,7 @@ export default function ResetPassword() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="address">Confirm New Password</label>
+          <label htmlFor="address">Xác nhận mật khẩu</label>
           <input
             type="password"
             className="form-control"
@@ -99,7 +99,7 @@ export default function ResetPassword() {
           role="status"
           aria-hidden="true"
         ></span>
-          Update
+          Cập nhật
           
         </button>
       </div>

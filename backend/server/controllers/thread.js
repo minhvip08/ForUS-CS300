@@ -15,7 +15,7 @@ const ERROR = require('./error');
 const COMMENTS_PER_PAGE = 10;
 const THUMBNAIL_SIZE = 50;
 const REGEX_SRC = /(?<=src=")([^"]+)(?=")/g;
-const REGEX_FIREBASE_URL = /(?:https:\/\/firebasestorage\.googleapis\.com\/v0\/b\/forusdb\.appspot\.com\/o\/images%2Fthread%2F)([a-zA-Z0-9%-]+)/;
+const REGEX_FIREBASE_URL = /(?:https:\/\/firebasestorage\.googleapis\.com\/v0\/b\/[a-z]+\.appspot\.com\/o\/images%2Fthread%2F)/;
 
 const resizeImage = async (image_data) => {
     let temp = image_data.split(';');
@@ -460,14 +460,20 @@ module.exports = {
     updateThread: async (req, res) => {
         let { body } = req.body;
         let thread_id = req.params.thread_id;
+        body = sanitizeHtml(body, { allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]) });
+        console.log(body);
+        let imgCount = body.split('&lt;img').length - 1;
+        let rawText = decode(body);
         if (thread_id == null || !Boolean(body)) {
             res.status(400).json({ error: "Invalid request." });
         }
+        else if (!Boolean(body) || rawText.length === 0) {
+            res.status(400).json({ error: ERROR.THREAD_BODY_TOO_SHORT });
+        }
+        else if (rawText.length > 10000) {
+            res.status(400).json({ error: ERROR.THREAD_BODY_TOO_LONG });
+        }
         else {
-            body = sanitizeHtml(body, { allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]) });
-            console.log(body);
-            let imgCount = body.split('&lt;img').length - 1;
-            let rawText = decode(body);
             try {
                 const user = await userUtil.findUserById(req);
                 if (user == null) {

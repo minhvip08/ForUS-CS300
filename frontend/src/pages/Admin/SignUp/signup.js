@@ -43,15 +43,15 @@ export default function SignUp() {
     <div>
       <meta charSet="utf-8" />
       <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico" />
-      <title>Checkout example for Bootstrap</title>
+      <title>Form Tạo người dùng mới</title>
 
       <div className="py-5 container">
         <div className="order-md-1 text-start">
-          <h1 className="mb-3 ">Register Form</h1>
+          <h1 className="mb-3 ">Form Tạo người dùng mới</h1>
           <form className="needs-validation" noValidate>
             <div className="row">
               <div className="col-md-6 mb-3">
-                <label htmlFor="firstName">Full name</label>
+                <label htmlFor="firstName">Tên đầy đủ</label>
                 <input
                   type="text"
                   className="form-control"
@@ -60,11 +60,11 @@ export default function SignUp() {
                   onChange={(e) => setFullName(e.target.value)}
                 />
                 <div className="invalid-feedback">
-                  Valid first name is required.
+                  Mục Tên đầy đủ là bắt buộc.
                 </div>
               </div>
               <div className="col-md-6 mb-3">
-                <label htmlFor="lastName">Student ID</label>
+                <label htmlFor="lastName">MSSV</label>
                 <input
                   type="text"
                   className="form-control"
@@ -73,7 +73,7 @@ export default function SignUp() {
                   onChange={(e) => setStudentID(e.target.value)}
                 />
                 <div className="invalid-feedback">
-                  Valid Student ID is required.
+                  Mục MSSV là bắt buộc.
                 </div>
               </div>
             </div>
@@ -97,7 +97,7 @@ export default function SignUp() {
               </div>
             </div>
             <div className="mb-3">
-              <label htmlFor="address">Address</label>
+              <label htmlFor="address">Địa chỉ</label>
               <input
                 type="text"
                 className="form-control"
@@ -106,12 +106,12 @@ export default function SignUp() {
                 required
                 onChange={(e) => setAddress(e.target.value)}
               />
-              <div className="invalid-feedback">Please enter your address.</div>
+              <div className="invalid-feedback">Nhập địa chỉ</div>
             </div>
 
             <div className="row">
               <div className="col-md-6 mb-3">
-                <label htmlFor="role">Role</label>
+                <label htmlFor="role">Vai trò</label>
                 <select
                   className="custom-select d-block w-100"
                   id="role"
@@ -128,7 +128,7 @@ export default function SignUp() {
               </div>
 
               <div className="col-md-6 mb-3">
-                <label htmlFor="date">Date of Birth</label>
+                <label htmlFor="date">Ngày tháng năm sinh</label>
                 <input
                   type="date"
                   className="form-control"
@@ -149,7 +149,7 @@ export default function SignUp() {
                 registerFunction();
               }}
             >
-              Register
+              Tạo người dùng
             </button>
           </form>
         </div>

@@ -16,6 +16,9 @@ const {
   updateAllNotificationIsRead,
   updateNotificationStatus,
   getThreadHistory,
+  setBanStatus,
+  banUser,
+  unbanUser,
   // getCommentHistory,
 } = require("../controllers/user");
 
@@ -38,5 +41,7 @@ router.get("/:id", userProfile);
 router.put("/notification", updateAllNotificationIsRead);
 router.put("/notification/:notification_id", updateNotificationStatus);
 // router.put("/comment-history", getCommentHistory);
+router.post("/ban", banUser, setBanStatus);
+router.post("/unban", unbanUser, setBanStatus);
 
 module.exports = router;

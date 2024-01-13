@@ -23,3 +23,12 @@
     color: var(--bs-white);
     text-decoration: underline;
 }
+
+@media screen and (max-width: 991.5px) {
+    .bg-card-primary {
+        border-radius: 0 0 16px 16px;
+    }
+    .bg-card-secondary {
+        border-radius: 16px 16px 0 0;
+    }
+}

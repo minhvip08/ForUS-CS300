@@ -39,7 +39,7 @@ export default function ({ comment, onReplyClick }) {
         <div className="card-body comment-card"style={{ margin: '20px 0' }} id={comment._id}>
             <div className="row m-0 p-0">
                 <div className="col-lg-2 bg-card-secondary round-left d-flex flex-column align-items-center text-center"
-                    style={{ paddingTop: '20px', paddingLeft: '20px' }}
+                    style={{ paddingTop: '20px', paddingInline: '20px' }}
                 >
                     <img className="rounded-circle centered-and-cropped bg-dark" width={100} height={100} src={
                         profilePicture ? profilePicture : 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'

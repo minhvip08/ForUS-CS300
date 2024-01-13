@@ -10,24 +10,22 @@ import { downloadImage } from "../../utils/loadImage";
 import { instance } from "../../api/config";
 import { useEffect, useState } from "react";
 
-
-export default function UserProfile() {
+export default function UserProfile({ user }) {
   const [avatar, setAvatar] = useState("");
-  const [avatarFile, setAvatarFile] = useState(null);
+  const [role, setRole] = useState("user");
   const [fullname, setFullname] = useState("");
   const [studentId, setStudentId] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [bio, setBio] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
   const user_id = useParams().user_id;
+  const [banned, setBanned] = useState(false);
+
   useEffect(() => {
     async function getUser() {
+      if (user_id == null) return;
       const response = await instance.get(`/users/${user_id}`);
       if (response.status === 200) {
-        console.log(response.data);
         const user = response.data.user;
         const avatar = await downloadImage("images/avatar/" + user.avatarUrl);
         setAvatar(avatar);
@@ -36,19 +34,32 @@ export default function UserProfile() {
         setEmail(user.email);
         setAddress(user.address);
         setBio(user.description);
-        console.log(user);
+        setBanned(user.isBanned);
+        setRole(user.role);
       }
     }
     getUser();
   }, [user_id]);
 
-
+  const handleBanButtonClick = async (user_id) => {
+    if (user.role != "admin" || role == "admin" || user_id == null) return;
+    if (!window.confirm(`Bạn muốn ${banned ? "bỏ chặn" : "chặn"} người dùng này?`)) return;
+    try {
+      let response = await instance.post(`/users/${banned ? "unban" : "ban"}`, {
+        user_id,
+      });
+      setBanned(response.data.status);
+      alert("Tác vụ hoàn tất.");
+    } catch (e) {
+      console.log("Errors", e);
+    }
+  };
 
   return (
     <div className="container ">
       <div className="py-5 container bg-info rounded-3 shadow-sm">
         <div className="order-md-1 text-start">
-          <h1 className="mb-3 text-white">Profile</h1>
+          <h1 className="mb-3 text-white">Hồ sơ cá nhân</h1>
           <div className="row">
             <div className="col-md-3 mb-3">
               <div className="text-center">
@@ -92,7 +103,7 @@ export default function UserProfile() {
             <div className="row">
               <div className="col-md-6 mb-3">
                 <label htmlFor="firstName " className="text-white">
-                  Full name
+                  Họ và tên
                 </label>
                 <input
                   type="text"
@@ -100,15 +111,14 @@ export default function UserProfile() {
                   id="firstName"
                   value={fullname}
                   readOnly
-
                   required
                 />
                 <div className="invalid-feedback text-white">
-                  Valid first name is required.
+                  Họ và tên là bắt buộc
                 </div>
               </div>
               <div className="col-md-6 mb-3 text-white">
-                <label htmlFor="lastName">Student ID</label>
+                <label htmlFor="lastName">Tài khoản</label>
                 <input
                   type="text"
                   className="form-control text-white"
@@ -116,11 +126,10 @@ export default function UserProfile() {
                   value={studentId}
                   // placeholder
                   readOnly
-
                   required
                 />
                 <div className="invalid-feedback text-white">
-                  Valid StudentID is required.
+                  Mục MSSV là bắt buộc
                 </div>
               </div>
             </div>
@@ -140,7 +149,6 @@ export default function UserProfile() {
                   value={email}
                   placeholder="you@example.com"
                   readOnly
-
                   required
                 />
                 {/* <div className="invalid-feedback">
@@ -150,7 +158,7 @@ export default function UserProfile() {
             </div>
             <div className="mb-3">
               <label htmlFor="address" className="text-white">
-                Address
+                Địa chỉ
               </label>
               <input
                 type="text"
@@ -160,13 +168,20 @@ export default function UserProfile() {
                 placeholder="1234 Main St"
                 required
                 readOnly
-
               />
-              <div className="invalid-feedback">Please enter your address.</div>
+              <div className="invalid-feedback">Nhập địa chỉ</div>
             </div>
-
             <hr className="mb-4" />
           </form>
+          {user.role == "admin" && role != "admin" ? <div className="d-flex justify-content-end w-100">
+            <button
+              className="btn btn-danger btn-lg"
+              type="submit"
+              onClick={() => handleBanButtonClick(user_id)}
+            >
+              {!banned ? "Chặn" : "Bỏ chặn"} người dùng này
+            </button>
+          </div> : null}
         </div>
       </div>
     </div>

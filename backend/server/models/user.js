@@ -42,6 +42,7 @@ const UserSchema = new Schema(
     lastAccessed: { type: Number, default: null },
     sessionStart: { type: Number, default: null },
     passwordResetExpiry: { type: Number, default: null },
+    isBanned: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

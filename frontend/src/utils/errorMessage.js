@@ -19,11 +19,15 @@ export default function errorMessage(error) {
         case 'PAGE_NOT_FOUND':
             return 'Không tìm thấy trang.';
         case 'THREAD_BODY_TOO_LONG':
-            return 'Nội dung quá dài.';
+            return 'Nội dung thread quá dài.';
         case 'THREAD_BODY_TOO_SHORT':
-            return 'Nội dung không được để trống.';
+            return 'Nội dung thread không được để trống.';
         case 'THREAD_TITLE_INVALID':
-            return 'Tiêu đề tối thiểu 1 ký tự, tối đa 128 ký tự.';
+            return 'Tiêu đề thread tối thiểu 1 ký tự, tối đa 128 ký tự.';
+        case 'COMMENT_BODY_TOO_LONG':
+            return 'Nội dung comment quá dài.';
+        case 'COMMENT_BODY_TOO_SHORT':
+            return 'Nội dung comment không được để trống.';
         default:
             return 'Lỗi không xác định.';
     }

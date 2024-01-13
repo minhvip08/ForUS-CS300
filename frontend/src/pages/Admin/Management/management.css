@@ -58,3 +58,10 @@ td {
 .custom-btn-blue:hover {
   background-color: #3c53e7; /* Adjust the color for hover */
 }
+.table td.available {
+  color: rgba(12, 139, 9, 0.911);
+}
+
+.table td.banned {
+  color: red;
+}

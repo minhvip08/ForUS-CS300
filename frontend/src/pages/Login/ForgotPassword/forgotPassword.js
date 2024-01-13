@@ -33,7 +33,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="">
-      <h3 className="text-center mb-4">Forgot Password</h3>
+      <h3 className="text-center mb-4">Quên Mật Khẩu</h3>
       <div
         className={`alert alert-danger my-2 d-flex align-items-center font-weight-bold ${
           !!status.message && status.level ==='error'  ? "d-block" : "d-none"
@@ -54,9 +54,8 @@ export default function ForgotPassword() {
         </div>
     
       <p className="text-start  mb-4 ">
-        To reset your password, submit your username below. If we can find you,
-        an email will be sent to your email address, with instructions how to get
-        access again.
+        Để lấy lại mật khẩu, vui lòng nhập tên đăng nhập của bạn và nhấn vào nút gửi email. Email sẽ được gửi đến địa chỉ email đã đăng ký của bạn.
+
       </p>
       <div className="form-floating">
         <input
@@ -66,7 +65,7 @@ export default function ForgotPassword() {
           placeholder="username"
           onChange={(event) => setUsername(event.target.value)}
         />
-        <label htmlFor="floatingInput">Username</label>
+        <label htmlFor="floatingInput">Tài khoản</label>
       </div>
 
       <button
@@ -83,7 +82,7 @@ export default function ForgotPassword() {
           <span className={`spinner-border spinner-border-sm ${isLoading? "d-block" : "d-none"}`}  role="status" aria-hidden="true"  >
     
           </span>
-          <p className="mb-0 ms-2">Send Email</p>
+          <p className="mb-0 ms-2">Gửi Email</p>
 
       </button>
     </div>
