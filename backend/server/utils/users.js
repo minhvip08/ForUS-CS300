@@ -9,7 +9,7 @@ const RESET_PASSWORD_EXPIRY = 15 * 60 * 1000;
 const findToken = function (req) {
   console.log("Finding token");
   console.log(req.cookies.token);
-  return null;
+  return req.cookies.token || req.header('Authorization');
 };
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
     let data;
     console.log("Finding user by id");
     try {
-      data = tokenGen.decodeToken(req.cookies.token);
+      data = tokenGen.decodeToken(findToken(req));
     } catch (e) {
       console.log(e);
       return null;
@@ -57,7 +57,7 @@ module.exports = {
   // fix bugs add wrong params
   userByIdExists: async function (req) {
     console.log("Checking if user exists");
-    if (req.cookies.token) return (await this.findUserById(req)) != null;
+    if (findToken(req)) return (await this.findUserById(req)) != null;
     return false;
   },
   findUserByCredentials: async function (username, password) {

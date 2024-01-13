@@ -8,8 +8,6 @@ const infoUser = async () => {
     console.error(error);
     return error.response;
   }
-
-  return null;
 };
 
 const logout = async () => {

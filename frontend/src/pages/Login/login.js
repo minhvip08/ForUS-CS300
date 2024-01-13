@@ -46,7 +46,10 @@ export default function Login() {
           // } else {
           //   setCookie("token", response.data.token,1);
           // }
+          setCookie("token", response.data.token, 30);
           axios.defaults.headers.common["Authorization"] = response.data.token;
+          localStorage.setItem("token", response.data.token);
+          
           // navigate("/");
           window.location.href = "/";
         } else {
