@@ -28,6 +28,9 @@ const loginUser = async (req, res, next) => {
       httpOnly: true,
       secure: false,
     });
+    console.log("loginUser");
+    console.log(user);
+    console.log(token);
     res.status(200).json({
       message: "Login successfully.",
       token: token,
