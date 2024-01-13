@@ -13,21 +13,22 @@ export default function NotificationItem({ notification }) {
     const diff = now - createdAt;
     const diffInMinutes = Math.floor(diff / 1000 / 60);
 
+
     if (diffInMinutes < 60) {
       setDiff(diffInMinutes);
-      setUnit("minute");
+      setUnit("phút");
     } else if (diffInMinutes < 24 * 60) {
       setDiff(Math.floor(diffInMinutes / 60));
-      setUnit("hour");
+      setUnit("giờ");
     } else if (diffInMinutes < 24 * 60 * 30) {
       setDiff(Math.floor(diffInMinutes / 60 / 24));
-      setUnit("day");
+      setUnit("ngày");
     } else if (diffInMinutes < 24 * 60 * 30 * 12) {
       setDiff(Math.floor(diffInMinutes / 60 / 24 / 30));
-      setUnit("month");
+      setUnit("tháng");
     } else {
       setDiff(Math.floor(diffInMinutes / 60 / 24 / 30 / 12));
-      setUnit("year");
+      setUnit("năm");
     }
 
     console.log(notification.isRead);
@@ -85,7 +86,7 @@ export default function NotificationItem({ notification }) {
           <p className="mb-0 opacity-75  ">{notification.body}.</p>
         </div>
         <small className="opacity-50 text-nowrap">
-          {diff} {unit} ago
+          {diff} {unit} trước
         </small>
       </div>
     </a>

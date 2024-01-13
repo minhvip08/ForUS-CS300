@@ -31,7 +31,7 @@ export default function Notification (){
         <div className="container">
             <div className="py-5 container bg-info rounded-3 shadow-sm">
                 <div className="order-md-1 text-start">
-                <h1 className="mb-3 text-white ms-3">Notifications: </h1>
+                <h1 className="mb-3 text-white ms-3">Thông báo: </h1>
                 {loading ? (
                     <div className="text-center">
                         <div

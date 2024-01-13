@@ -23,6 +23,8 @@ const loginUser = async (req, res, next) => {
     const user = await userUtil.findUserByCredentials(username, password);
     if (user == null)
       return res.status(403).json({ error: "Invalid username or password." });
+    if (user.isBanned)
+      return res.status(403).json({ error: "You are banned." });
     const token = await userUtil.getToken(user);
     res.cookie("token", token, {
       httpOnly: true,
@@ -391,6 +393,7 @@ const getAllUsers = async (req, res, next) => {
         "lastAccessed",
         "avatarUrl",
         "role",
+        "isBanned",
       ];
 
       result = result.map((e) => {
@@ -499,13 +502,51 @@ const getThreadHistory = async (req, res) => {
     try {
       let data = [];
       for (let thread of _user.threads) {
-        data.push(await Thread.findById(thread));
+        let t = await Thread.findById(thread);
+        if (t) data.push(t);
       }
       res.status(200).json({ threadHistory: data });
     } catch (err) {
-      res.status(500).json({ a: err.message, error: ERROR.INTERNAL_SERVER_ERROR });
+      res
+        .status(500)
+        .json({ a: err.message, error: ERROR.INTERNAL_SERVER_ERROR });
     }
   }
+};
+
+const setBanStatus = async function (req, res, next) {
+  let ban = !!req.params.ban;
+  try {
+    const user = await userUtil.findUserById(req);
+    if (user == null || user.role != "admin")
+      res.status(403).json({ error: "Not permitted." });
+    else {
+      let user_id = req.body.user_id,
+        target;
+      if (
+        user_id == null ||
+        (target = await userModel.findById(user_id)) == null
+      )
+        return res.status(403).json({ message: ERROR.USER_NOT_FOUND });
+      if (target._id == user._id) return res.status(403).json({ message: "You wanna ban yourself??" });
+      if (target.role == "admin") return res.status(403).json({ message: "Cannot ban admins."});
+      target.isBanned = ban;
+      await target.save();
+      res.status(200).json({ message: "Action completed.", status: ban });
+    }
+  } catch (e) {
+    res.status(500).json({ message: ERROR.INTERNAL_SERVER_ERROR });
+  }
+};
+
+const banUser = function (req, res, next) {
+  req.params.ban = true;
+  next();
+};
+
+const unbanUser = function (req, res, next) {
+  req.params.ban = false;
+  next();
 };
 
 module.exports = {
@@ -525,4 +566,7 @@ module.exports = {
   updateAllNotificationIsRead,
   updateNotificationStatus,
   getThreadHistory,
+  setBanStatus,
+  banUser,
+  unbanUser,
 };

@@ -181,6 +181,7 @@ module.exports = {
                                     _id: 1,
                                     title: 1,
                                     body: 1,
+                                    imageUrl: 1,
                                     author: 1,
                                     score: 1,
                                     commentCount: 1,

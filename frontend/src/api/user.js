@@ -103,9 +103,9 @@ const getAllUsers = async () => {
   return null;
 };
 
-const getThreadHistory = async () => {
+const getThreadHistory = async (ID) => {
   try {
-    const response = await instance.get("/users/thread-history");
+    const response = await instance.get("/users/thread-history?user_id=" + ID);
     return response;
   } catch (error) {
     console.error("Error fetching users:", error.response);

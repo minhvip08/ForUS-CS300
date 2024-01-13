@@ -20,7 +20,7 @@ export default function News(){
             <div className=" text-start  ">
                 <div className="card mb-4 rounded-3 shadow-sm bg-primary  ">
                     <div className="card-header py-3 ">
-                        <h4 className="text-white">Tin mới</h4>
+                        <h4 className="text-white">Thông báo mới</h4>
                     </div>
                     <div className="card-body">
                         

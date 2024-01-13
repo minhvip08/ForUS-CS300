@@ -28,11 +28,11 @@ const AuthRequiredRoute = ({ auth, element }) => {
 };
 
 function Router() {
-  const [state, setState] = useState({ isLoading: true, authenticated: false });
+  const [state, setState] = useState({ isLoading: true, authenticated: false, user: {} });
   useEffect(() => {
     async function checkAuth() {
       const isAuth = await isLogin();
-      setState({ isLoading: false, authenticated: isAuth });
+      setState({ isLoading: false, authenticated: !!isAuth, user: isAuth || {} });
     }
     checkAuth();
   }, []);
@@ -66,7 +66,7 @@ function Router() {
         <Route path="thread/:thread_id" element={<Thread />} />
         <Route path="thread/:thread_id/:page" element={<Thread />} />
         <Route path="search/:page" element={<Search />} />
-        <Route path="user/:user_id" element={<UserProfile />} />
+        <Route path="user/:user_id" element={<UserProfile user={state.user} />} />
         <Route path="*" element={<NotFound />} />
         <Route path="notification" element={<Notification />} />
       </Route>

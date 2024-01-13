@@ -19,7 +19,7 @@ async function downloadImage(url) {
 
 async function uploadImage(file, url){
     try {
-        const storage = storage;
+        // const storage = storage;
         const fileRef = url ;
         const imageReference = ref(storage, fileRef);
         const uploadTask = await uploadBytes(imageReference, file);
@@ -33,7 +33,7 @@ async function uploadImage(file, url){
 
 async function deleteImage(url){
     try {
-        const storage = storage;
+        // const storage = storage;
         const fileRef = url ;
         const imageReference = ref(storage, fileRef);
         await deleteObject(imageReference);

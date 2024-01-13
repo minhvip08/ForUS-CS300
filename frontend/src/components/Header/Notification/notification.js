@@ -94,9 +94,9 @@ export default function Notification() {
           >
             <li>
               <div className="d-flex justify-content-between align-items-center">
-                <h1 className="dropdown-header">Notification</h1>
+                <h1 className="dropdown-header">Thông báo</h1>
                 <a href="/notification" className="pe-2">
-                  See all notifications
+                  Xem tất cả
                 </a>
               </div>
             </li>
@@ -125,7 +125,7 @@ export default function Notification() {
 
             {notifications.length === 0 && !loading ? (
               <li>
-                <p className="text-center text-muted ">No notifications</p>
+                <p className="text-center text-muted ">Không có thông báo...</p>
               </li>
             ) : (
               <li>
@@ -134,7 +134,7 @@ export default function Notification() {
                   className="dropdown-item   py-1 text-center notificationItem"
                   onClick={markAllAsRead}
                 >
-                  Mark all as read
+                  Đánh dấu tất cả là đã đọc
                 </a>
               </li>
             )}

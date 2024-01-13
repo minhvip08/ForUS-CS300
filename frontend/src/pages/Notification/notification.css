@@ -2,7 +2,7 @@
   background-color: #000000;
 } */
 
-.notificationItem:hover {
+.notificationItemPage:hover {
   background-color: rgb(10, 98, 110) !important;
 }
 

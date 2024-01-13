@@ -31,12 +31,14 @@ export default function Login() {
         formData.password.length >= 4 &&
         formData.password.length <= 20
       ) {
+
         const response = await login(formData);
         console.log(response);
         if (response.status !== 200) {
           console.log(response.data.error);
           setErrorMessage({ message: response.data.error });
         }
+
         if (response.status === 200) {
           // console.log(rememberMe);
           // if (rememberMe) {
@@ -50,7 +52,11 @@ export default function Login() {
         } else {
           setValid(false);
         }
-      } else {
+      }
+      else if (formData.username.length ==0 || formData.username.length ==0) {
+        setErrorMessage({ message: "Missing username or password" });
+      }
+      else {
         setErrorMessage({ message: "Invalid Username or Password" });
       }
 
@@ -71,7 +77,7 @@ export default function Login() {
   };
   return (
     <>
-      <h3 className="text-center mb-4">Please Sign in</h3>
+      <h3 className="text-center mb-4">Đăng nhập</h3>
       <div
         className={`alert alert-danger my-2 d-flex align-items-center font-weight-bold ${
           !!errorMessage.message ? "d-block" : "d-none"
@@ -88,7 +94,7 @@ export default function Login() {
           placeholder="username"
           onChange={(event) => handleLoginInputChange(event)}
         />
-        <label htmlFor="floatingInput">Username</label>
+        <label htmlFor="floatingInput">Tài khoản</label>
       </div>
 
       <div className="form-floating">
@@ -99,7 +105,7 @@ export default function Login() {
           placeholder="password"
           onChange={(event) => handleLoginInputChange(event)}
         />
-        <label htmlFor="floatingPassword">Password</label>
+        <label htmlFor="floatingPassword">Mật khẩu</label>
       </div>
 
       {/* <div className="form-check text-start my-3">
@@ -127,7 +133,7 @@ export default function Login() {
           role="status"
           aria-hidden="true"
         ></span>
-        <p className="mb-0 ms-2">Sign in</p>
+        <p className="mb-0 ms-2">Đăng nhập</p>
       </button>
       <hr className="my-4" />
       <button
@@ -138,7 +144,7 @@ export default function Login() {
           window.location.href = "/login/forgot-password";
         }}
       >
-        Forgot Password
+        Quên mật khẩu
       </button>
     </>
   );

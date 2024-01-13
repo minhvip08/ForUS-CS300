@@ -12,19 +12,19 @@ export default function NotificationItem({ notification }) {
 
     if (diffInMinutes < 60) {
       setDiff(diffInMinutes);
-      setUnit("minute");
+      setUnit("phút");
     } else if (diffInMinutes < 24 * 60) {
       setDiff(Math.floor(diffInMinutes / 60));
-      setUnit("hour");
+      setUnit("giờ");
     } else if (diffInMinutes < 24 * 60 * 30) {
       setDiff(Math.floor(diffInMinutes / 60 / 24));
-      setUnit("day");
+      setUnit("ngày");
     } else if (diffInMinutes < 24 * 60 * 30 * 12) {
       setDiff(Math.floor(diffInMinutes / 60 / 24 / 30));
-      setUnit("month");
+      setUnit("tháng");
     } else {
       setDiff(Math.floor(diffInMinutes / 60 / 24 / 30 / 12));
-      setUnit("year");
+      setUnit("năm");
     }
 
     console.log(notification.isRead);
@@ -44,7 +44,7 @@ export default function NotificationItem({ notification }) {
             (notification.comment ? "#" + notification.comment : "")
           : "#"
       }
-      className="dropdown-item list-group-item-action d-flex  gap-3 p-3 notificationItem  "
+      className="dropdown-item list-group-item-action d-flex  gap-3 p-3 notificationItemPage  "
       id={notification._id}
       aria-current="true"
     >
@@ -82,7 +82,7 @@ export default function NotificationItem({ notification }) {
           <p className="mb-0 opacity-75  ">{notification.body}.</p>
         </div>
         <small className="opacity-50 text-nowrap">
-          {diff} {unit} ago
+          {diff} {unit} trước
         </small>
       </div>
     </a>
