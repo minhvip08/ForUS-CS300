@@ -12,6 +12,7 @@ import "./login.css";
 export default function Login({ auth }) {
 
     return auth ? <Navigate to="/" /> :(
+      <div>
         <div className="d-flex align-items-center py-4 bg-body-tertiary vh-100 ">
         <main className="form-signin w-100 m-auto">
           <form>
@@ -24,9 +25,14 @@ export default function Login({ auth }) {
 
   
 
-            <p className="mt-5 mb-3 text-body-secondary">&copy; 2023-2024 ForUS</p>
+            <div className="d-flex flex-column mt-4 mb-3 align-items-start">
+              <p className="text-muted text-start">Tài khoản: administrator <br></br> Mật khẩu: 12345</p>
+            </div>
+            <p className="text-muted ">© ForUS 2023-2024</p>
           </form>
         </main>
       </div>
+      </div>
+
     );
 }
